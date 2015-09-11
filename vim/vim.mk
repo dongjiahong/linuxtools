@@ -8,6 +8,7 @@ set shiftwidth=4
 set cindent
 set autoindent
 set nobackup
+set hls
 set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
 
 
