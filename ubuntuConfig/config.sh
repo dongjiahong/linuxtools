@@ -3,7 +3,7 @@
 #该脚本是针对ubuntu(debian)系列的linux安装后的初始化。
 #----------以root　身份运行----------#
 #安装的软件有:
-#		g++; tmux; vim; unity-tweak-tool; cmake
+#		g++; tmux; vim; [gnome ,unity]-tweak-tool; cmake
 #
 #
 #
@@ -11,8 +11,8 @@
 
 
 INSTALL="apt-get install -y"
-VIMRC="~/.vimrc"
-TMUXRC="~/.tmux.conf"
+VIMRC="/home/lele/.vimrc"
+TMUXRC="/home/lele/.tmux.conf"
 AUTOREMOVE="apt-get autoremove"
 #-------------２、安装vim------------>
 ${INSTALL} vim
@@ -22,8 +22,8 @@ if [ -f ${VIMRC} ]
 then
 	echo "~/.vimrc 已经存在"
 else
-	cp /etc/vim/vimrc ~/.vimrc
-	cat vimConfig >> ~/.vimrc
+	cp /etc/vim/vimrc ${VIMRC}
+	cat vimConfig >> ${VIMRC}
 fi
 
 #------------３、安装g++------------->
@@ -41,7 +41,10 @@ fi
 #-----------５、主题安装------------->
 #(更多主题见：http://www.ubuntuthemes.org,账号：112233880密码：dong123邮箱：dongjiahong@hotmail.com)
 #主题选择工具
-${INSTALL} unity-tweak-tool
+#unity tool
+#${INSTALL} unity-tweak-tool
+#gnome tool
+${INSTALL} gnome-tweak-tool
 #vertex-them主题比较喜欢
 add-apt-repository -y ppa:noobslab/themes
 apt-get update
