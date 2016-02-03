@@ -5,7 +5,7 @@ size_t QueryRunner::query(const string &sql) {
 	size_t row_num = 0;
 	try{
 		//建立链接
-		if (conn.connect(db_name.c_str(), mysql_host.c_str(), user.c_str(), password.c_str())) {
+		if (conn.connect(db_info.db_name.c_str(), db_info.db_host.c_str(), db_info.db_user.c_str(), db_info.db_paswd.c_str())) {
 			//建立查询
 			mysqlpp::Query query = conn.query(sql);
 			//获取查询结果

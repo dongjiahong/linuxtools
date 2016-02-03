@@ -1,5 +1,6 @@
 #include <iostream>
 #include <mysql++/mysql++.h>
+#include "type.h"
 using namespace std;
 
 /**
@@ -9,12 +10,16 @@ using namespace std;
 
 class QueryRunner{
 public:
-	QueryRunner(const string &db_name, const string &mysql_host, const string &user, const string &password) {
+	QueryRunner(const DBINFO &db_info) {
+	//QueryRunner(const string &db_name, const string &mysql_host, const string &user, const string &password) {
+		/*
 		this->db_name		=	db_name;
 		this->mysql_host	=	mysql_host;
 		this->user			=	user;
 		this->password		=	password;
 		//this->res			=	NULL;
+		*/
+		this->db_info	=	db_info;
 		conn = mysqlpp::Connection(false);
 	}
 	//执行查询语句
@@ -25,10 +30,13 @@ public:
 
 	~QueryRunner(){}
 private:
+	DBINFO db_info;
+	/*
 	string db_name;
 	string mysql_host;
 	string user;
 	string password;
+	*/
 	mysqlpp::Connection conn;
 	mysqlpp::StoreQueryResult res;
 };
