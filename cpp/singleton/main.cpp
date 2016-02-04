@@ -4,6 +4,7 @@
 /*
    自己区分singleton和singletonB的区别，
    singleton能继承，singletonB不能继承
+   这是因为singleton的构造函数是私有。
    */
 class Test : public Singleton<Test> {
 public:
