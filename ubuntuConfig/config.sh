@@ -4,7 +4,7 @@
 #----------以root　身份运行----------#
 #安装的软件有:
 #		g++; tmux; vim; [gnome ,unity]-tweak-tool; cmake
-#
+#		boost; java; 
 #
 #
 #
