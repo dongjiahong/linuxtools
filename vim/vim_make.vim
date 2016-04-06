@@ -1,6 +1,6 @@
 "这里是我常用的一些vim的配置`
 
-set nocompatible    "关闭vi兼容模式
+set ocompatible    "关闭vi兼容模式
 syntax on			"开启语法高亮
 set nu				"行号        
 set hls				"高亮
@@ -29,7 +29,7 @@ let g:rehash256 = 1
 let g:molokai_original = 0 
 
 
-
+"----下面是插件的安装和配置----
 
 `这下面是vim安装YouCompleteMe插件的方法和配置内容`
 需要的软件:
@@ -40,6 +40,7 @@ let g:molokai_original = 0
 	- CMake (>=2.8) (为c++项目生成 compile database)(sudo apt-get install cmake)
 	- pylint (高级python语法检查支持)
 	- python (系统自带的python没有dev：sudo apt-get install python-dev)
+    - 如果报错说YCM需要python支持，安装python-dev也没有用的话可以安装vim-nox
 安装：
 	1、使用git下载vundle
 		运行命令： git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
@@ -56,12 +57,15 @@ let g:molokai_original = 0
 
 		Bundle 'gmarik/vundle'
 
-		Bundle 'Valloric/YouCompleteMe'
-		Bundle 'Valloric/ListToggle'
-		Bundle 'scrooloose/syntastic'
+		Bundle 'Valloric/YouCompleteMe'  "安装插件ycm
+		Bundle 'Valloric/ListToggle'     "安装插件ListToggle
+		Bundle 'scrooloose/syntastic'    "安装插件syntastic静态语法检查
+        Bundle 'vim-airline/vim-airline'  "安装vim的airline插件
+        Plugin 'vim-airline/vim-ariline-themes' "安装airline主题
 
 		filetype plugin indent on
 		""""""""""""""""""""" Vundle
+
 		然后编辑完成后在命令行中输入下面指令：
 		:source ~/.vimrc
 		:BundleInstall
@@ -79,4 +83,22 @@ let g:molokai_original = 0
 		"Do not ask when starting vim"
 		let g:ycm_confirm_extra_conf = 0
 		let g:syntastic_always_populate_loc_list = 1
+
+插件配置：
+        "------->>CYM插件的匹配配置<<-------
+        " 补全内容不以分割子窗口形式出现，只显示补全列表
+        set completeopt-=preview
+        " 从第二个键入字符就开始罗列匹配项
+        let g:ycm_min_num_of_chars_for_completion=2
+        " 语法关键字补全         
+        let g:ycm_seed_identifiers_with_syntax=1
+        "------->>airline<<---------
+        "安装字体补丁 https://github.com/powerline/fonts
+        "下载下来后./install.sh, 然后在终端里选上带补丁的字体
+        "开启tab状态栏
+        let g:airline#extensions#tabline#enabled = 1
+        " airline 主题配置              
+        let g:airline_theme='papercolor'
+        "安装字体补丁后必须加上下面一行
+        let g:airline_powerline_fonts = 1
 
