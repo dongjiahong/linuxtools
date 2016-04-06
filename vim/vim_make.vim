@@ -1,16 +1,34 @@
-`这里是我常用的一些vim的配置`
+"这里是我常用的一些vim的配置`
 
-set nu                               
-set laststatus=2
-set tabstop=4
-set expandtab
-set softtabstop=4
-set shiftwidth=4
-set cindent
-set autoindent
-set nobackup
-set hls
+set nocompatible    "关闭vi兼容模式
+syntax on			"开启语法高亮
+set nu				"行号        
+set hls				"高亮
+set cursorline		"突出当前行
+set ruler			"打开状态栏标尺
+set foldenable		"开始折叠
+set foldmethod=syntax	"设置折叠域的宽度
+setlocal foldlevel=1	"设置折叠层数为1
+"set foldclose=all	"设置自动关闭折叠
+set showmatch		"插入括号时，短暂的跳转到匹配括号
+set matchtime=1		"短暂跳转到匹配括号的时间
+set tabstop=4		"tab键的宽度为4
+set expandtab		"设
+set softtabstop=4	"使用退格键时，一次删除4个空格
+set shiftwidth=4	"设置<<和>>命令移动时的宽度为4
+set cindent			"c风格的换行
+set autoindent		"自动换行
+set smartindent		"开启新行时使用智能自动缩进
+set nobackup		"不允许自动备份
+set laststatus=2	"显示状态栏
 set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
+"下面是对molokai的主题配置,需要将molokai.vim文件拷贝到/usr/share/vim/vim74/colors
+set t_Co=256
+colorscheme molokai
+let g:rehash256 = 1 
+let g:molokai_original = 0 
+
+
 
 
 `这下面是vim安装YouCompleteMe插件的方法和配置内容`

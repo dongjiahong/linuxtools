@@ -12,7 +12,7 @@
 
 INSTALL="apt-get install -y"
 VIMRC="/home/lele/.vimrc"
-TMUXRC="/home/lele/.tmux.conf"
+#TMUXRC="/home/lele/.tmux.conf"
 AUTOREMOVE="apt-get autoremove"
 #-------------２、安装vim------------>
 ${INSTALL} vim
@@ -27,16 +27,16 @@ else
 fi
 
 #------------３、安装g++------------->
-${INSTALL} g++
+${INSTALL} g++ gcc
 
 #------------４、安装tmux------------>
-${INSTALL} tmux
-if [ -f ${TMUXRC} ]
-then
-	echo "~/.tmux.conf 已经存在"
-else
-	cp tmuxConfig ${TMUXRC}
-fi
+#${INSTALL} tmux
+#if [ -f ${TMUXRC} ]
+#then
+#	echo "~/.tmux.conf 已经存在"
+#else
+#	cp tmuxConfig ${TMUXRC}
+#fi
 
 #-----------５、主题安装------------->
 #(更多主题见：http://www.ubuntuthemes.org,账号：112233880密码：dong123邮箱：dongjiahong@hotmail.com)
@@ -44,11 +44,11 @@ fi
 #unity tool
 #${INSTALL} unity-tweak-tool
 #gnome tool
-${INSTALL} gnome-tweak-tool
-#vertex-them主题比较喜欢
-add-apt-repository -y ppa:noobslab/themes
-apt-get update
-${INSTALL} vertex-theme
+#${INSTALL} gnome-tweak-tool
+##vertex-them主题比较喜欢
+#add-apt-repository -y ppa:noobslab/themes
+#apt-get update
+#${INSTALL} vertex-theme
 
 #----------６、安装cmake------------>
 ${INSTALL} cmake
