@@ -1,6 +1,6 @@
 "这里是我常用的一些vim的配置`
 
-set ocompatible    "关闭vi兼容模式
+set nocompatible    "关闭vi兼容模式
 syntax on			"开启语法高亮
 set nu				"行号        
 set hls				"高亮
@@ -56,12 +56,15 @@ let g:molokai_original = 0
 		call vundle#rc()
 
 		Bundle 'gmarik/vundle'
-
-		Bundle 'Valloric/YouCompleteMe'  "安装插件ycm
-		Bundle 'Valloric/ListToggle'     "安装插件ListToggle
-		Bundle 'scrooloose/syntastic'    "安装插件syntastic静态语法检查
-        Bundle 'vim-airline/vim-airline'  "安装vim的airline插件
-        Plugin 'vim-airline/vim-ariline-themes' "安装airline主题
+        "安装插件ycm
+		Bundle 'Valloric/YouCompleteMe'
+        "安装插件ListToggl
+		Bundle 'Valloric/ListToggle'
+        "安装静态语法检查syntastic
+		Bundle 'scrooloose/syntastic'
+        "安装vim-aitline和主题
+        Bundle 'vim-airline/vim-airline'
+        Plugin 'vim-airline/vim-ariline-themes'
 
 		filetype plugin indent on
 		""""""""""""""""""""" Vundle
