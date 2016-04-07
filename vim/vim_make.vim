@@ -6,9 +6,9 @@ set nu				"行号
 set hls				"高亮
 set cursorline		"突出当前行
 set ruler			"打开状态栏标尺
-set foldenable		"开始折叠
-set foldmethod=syntax	"设置折叠域的宽度
-setlocal foldlevel=1	"设置折叠层数为1
+"set foldenable		"开始折叠
+"set foldmethod=syntax	"设置折叠域的宽度
+"setlocal foldlevel=1	"设置折叠层数为1
 "set foldclose=all	"设置自动关闭折叠
 set showmatch		"插入括号时，短暂的跳转到匹配括号
 set matchtime=1		"短暂跳转到匹配括号的时间
@@ -57,13 +57,13 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
-"Bundle 'Valloric/YouCompleteMe'
-"Bundle 'Valloric/ListToggle'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/ListToggle'
 Plugin 'taglist.vim'
 Bundle 'scrooloose/syntastic'   
 Plugin 'tomasr/molokai'
 Bundle 'bling/vim-airline'  
-Plugin 'vim-airline/vim-ariline-themes'
+Plugin 'vim-airline/vim-airline-themes'
 
 filetype plugin indent on
 "-------->>> Vundle <<<------
@@ -81,18 +81,24 @@ filetype plugin indent on
 "		cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py ~
 "		.ycm_extra_conf.py是C++的配置文件
 "	4、不想每次打开vim都烦人的询问是否加载的话在.vimrc里加入下面的配置
-"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 "Do not ask when starting vim"
-"let g:ycm_confirm_extra_conf = 0
-"let g:syntastic_always_populate_loc_list = 1
+let g:ycm_confirm_extra_conf = 0
+let g:syntastic_always_populate_loc_list = 1
 
 "------->>CYM插件的匹配配置<<-------
 " 补全内容不以分割子窗口形式出现，只显示补全列表
-"set completeopt-=preview
+set completeopt-=preview
 " 从第二个键入字符就开始罗列匹配项
-"let g:ycm_min_num_of_chars_for_completion=2
+let g:ycm_min_num_of_chars_for_completion=2
 " 语法关键字补全         
-"let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_seed_identifiers_with_syntax=1
+
+"-------->>syntastic配置<<----------
+""修改syntastic的默认c98为c++11这样不会报有关c98的兼容性错误
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
+
 
 "------->>airline<<---------
 "安装字体补丁 https://github.com/powerline/fonts
@@ -100,7 +106,7 @@ filetype plugin indent on
 "开启tab状态栏
 let g:airline#extensions#tabline#enabled = 1
 " airline 主题配置              
-let g:airline_theme='papercolor'
+let g:airline_theme='luna'
 "安装字体补丁后必须加上下面一行
 let g:airline_powerline_fonts = 1
 
