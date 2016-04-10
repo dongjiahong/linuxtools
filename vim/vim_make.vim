@@ -6,7 +6,8 @@ set nu				"行号
 set hls				"高亮
 set cursorline		"突出当前行
 set ruler			"打开状态栏标尺
-"set foldenable		"开始折叠
+set foldenable		"开始折叠
+set nofoldenable		"不折叠
 "set foldmethod=syntax	"设置折叠域的宽度
 "setlocal foldlevel=1	"设置折叠层数为1
 "set foldclose=all	"设置自动关闭折叠
@@ -65,6 +66,10 @@ Plugin 'tomasr/molokai'
 Bundle 'bling/vim-airline'  
 Plugin 'vim-airline/vim-airline-themes'
 
+"vim-markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'"vim-markdown
+
 filetype plugin indent on
 "-------->>> Vundle <<<------
 
@@ -118,3 +123,7 @@ let Tlist_Exit_OnlyWindow = 1          "如果taglist窗口是最后一个窗口
 let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist窗口 
 "宏，F9打开taglist
 map <silent> <F9> :TlistToggle<cr>     
+
+"--------->>vim-markdown<<-----------
+let g:vim_markdown_fenced_languages = ['c++=cpp','viml=vim','bash=sh','ini=dosini', 'csharp=cs']   "配置不同语法块的预防高亮
+let g:vim_markdown_folding_disable = 1  "不主动折叠 
