@@ -5,6 +5,7 @@ using namespace std;
 //这里是配置的各种结构体
 // " adgroup|begin|end|num|flag "
 typedef struct controlConfig{
+    string platform;
     long adgroup;
     string beginTime;
     string endTime;
@@ -20,6 +21,14 @@ typedef struct db_info_machine{
     string db_paswd;
 }DBINFO;
 
+//这里是广告的信息log格式
+typedef struct adinfo{
+    long adgroup_id;
+    long member_id;
+    long campaign_id;
+    int max_price;
+    int trans_type;
+}ADINFO;
 //这里是各种log的格式
 typedef struct reqBd{
 

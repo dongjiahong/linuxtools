@@ -1,7 +1,7 @@
 #include "tools.h"
 #include "struct.h"
 #include "QueryRunner.h"
-
+#include "createLog.h"
 
 int main() {
     superman::MyTime::instance().initTime();
@@ -23,5 +23,9 @@ int main() {
             cout << res[i]["id"] << "  "<< res[i]["name"] << endl;
         }
     }
+    cout << "----------------" << endl;
+    cout << CreateLog::instance().getRandom(0,1) << endl;
+    cout << CreateLog::instance().getRandom(3,3) << endl;
+    cout << CreateLog::instance().getRandom(1,5) << endl;
     return 0;
 }
