@@ -29,6 +29,7 @@ protected:
 			__instance = NULL;
 			delete t;
 		}
+        cout << "delete singleton complate!" << endl;
 	}
 
 	Singleton(const Singleton& rhs);

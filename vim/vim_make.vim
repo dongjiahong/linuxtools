@@ -101,9 +101,12 @@ let g:ycm_seed_identifiers_with_syntax=1
 
 "-------->>syntastic配置<<----------
 ""修改syntastic的默认c98为c++11这样不会报有关c98的兼容性错误
-let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
-
+" 设置错误符号
+let g:syntastic_error_symbol='✗'
+" 设置警告符号
+let g:syntastic_warning_symbol='⚠'
 
 "------->>airline<<---------
 "安装字体补丁 https://github.com/powerline/fonts
