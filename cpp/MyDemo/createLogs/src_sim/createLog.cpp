@@ -24,7 +24,7 @@ string CreateLog::getRandom(const int &small, const int &digit) {
 
 string CreateLog::getBid(const string &platform) {
     string res = "wrong";
-    if (platfrom == "mz") {
+    if (platform == "mz") {
     } else if(platform == "ky") {
     } else if(platform == "bd") {
     } else if(platform == "tb") {
