@@ -5,6 +5,7 @@ syntax on			"开启语法高亮
 set nu				"行号        
 set hls				"高亮
 set cursorline		"突出当前行
+hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=white
 set ruler			"打开状态栏标尺
 set foldenable		"开始折叠
 set nofoldenable		"不折叠
