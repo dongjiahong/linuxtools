@@ -5,13 +5,8 @@ syntax on			"开启语法高亮
 set nu				"行号        
 set hls				"高亮
 set cursorline		"突出当前行
-hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=white
+hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE
 set ruler			"打开状态栏标尺
-set foldenable		"开始折叠
-set nofoldenable		"不折叠
-"set foldmethod=syntax	"设置折叠域的宽度
-"setlocal foldlevel=1	"设置折叠层数为1
-"set foldclose=all	"设置自动关闭折叠
 set showmatch		"插入括号时，短暂的跳转到匹配括号
 set matchtime=1		"短暂跳转到匹配括号的时间
 set tabstop=4		"tab键的宽度为4
