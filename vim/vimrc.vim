@@ -61,3 +61,8 @@ let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist窗口
 "宏，F8打开taglist
 nmap <F8> :TagbarToggle<CR>     
 
+"映射分割屏幕的快捷键 Ctrl+h 往左屏切,Ctrl+j往上切等
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
