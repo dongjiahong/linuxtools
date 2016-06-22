@@ -43,6 +43,7 @@ Plugin 'tomasr/molokai'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on
@@ -66,3 +67,14 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+"------------->ycm<------------
+"cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py ~/
+set completeopt=longest,menu
+"不询问是否加载
+let g:ycm_confirm_extra_conf=0
+""错误
+let g:ycm_error_symbol = '>>'
+""警告
+let g:ycm_warning_symbol = '>*'
+
