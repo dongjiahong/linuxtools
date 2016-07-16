@@ -43,7 +43,7 @@ Plugin 'tomasr/molokai'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 filetype plugin indent on
@@ -62,6 +62,22 @@ let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist窗口
 "宏，F8打开taglist
 nmap <F8> :TagbarToggle<CR>     
 
+"-------->>syntastic<<---------
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"let g:syntastic_cpp_remove_include_errors = 1
+let g:syntastic_cpp_check_header = 1
+
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libstdc++'
+
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+
+
 "映射分割屏幕的快捷键 Ctrl+h 往左屏切,Ctrl+j往上切等
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -69,12 +85,3 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 "------------->ycm<------------
-"cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py ~/
-set completeopt=longest,menu
-"不询问是否加载
-let g:ycm_confirm_extra_conf=0
-""错误
-let g:ycm_error_symbol = '>>'
-""警告
-let g:ycm_warning_symbol = '>*'
-
