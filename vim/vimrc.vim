@@ -21,7 +21,11 @@ set t_Co=256
 colorscheme molokai
 let g:rehash256 = 1 
 let g:molokai_original = 1	"1浅色，0深色 
-
+"快捷键
+" 定义快捷键的前缀，即<Leader>
+let mapleader=","
+" 输入,ee 就是打开.vimrc
+nmap <leader>ee :e ~/.vimrc<cr>	
 
 "安装：
 "	1、使用git下载vundle
@@ -63,9 +67,9 @@ let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist窗口
 nmap <F8> :TagbarToggle<CR>     
 
 "-------->>syntastic<<---------
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 "let g:syntastic_cpp_remove_include_errors = 1
@@ -84,4 +88,25 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-"------------->ycm<------------
+"------------->cscope<------------
+if has("cscope")
+  set csprg=/usr/bin/cscope
+  set csto=1
+  set cst
+  set nocsverb
+  " add any database in current directory
+  if filereadable("cscope.out")
+      cs add cscope.out
+  endif
+  set csverb
+endif
+
+"快捷键的配置，这里输入",ss"就是执行cs find s world 命令
+nmap <leader>ss :cs find s<C-R>=expand("<cword>")<cr><cr>
+nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>sc :cs find c <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>st :cs find t <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>sf :cs find f<C-R>=expand("<cfile>")<cr><cr>
+nmap <leader>si :cs find i<C-R>=expand("<cfile>")<cr><cr>
+nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
