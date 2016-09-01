@@ -11,6 +11,7 @@ set softtabstop=4	"使用退格键时，一次删除4个空格
 set shiftwidth=4	"设置<<和>>命令移动时的宽度为4
 "set cindent			"c风格的换行
 set backspace=2		"mac机器需要开这个能用backspace键
+set nofoldenable	"不折叠
 set autoindent		"自动换行
 set smartindent		"开启新行时使用智能自动缩进
 set nobackup		"不允许自动备份
@@ -48,6 +49,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()
 filetype plugin indent on
@@ -110,3 +113,8 @@ nmap <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
 nmap <leader>sf :cs find f<C-R>=expand("<cfile>")<cr><cr>
 nmap <leader>si :cs find i<C-R>=expand("<cfile>")<cr><cr>
 nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
+
+" ====>markdown 的设置<====
+" 不折叠
+let g:vim_markdown_folding_disable = 1
+
