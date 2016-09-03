@@ -109,3 +109,51 @@ cd /usr/local/tb/tfs/bin
 ```
 
 我们可以将文件获取下来名字为`file` 然后我通过`md5sum` 指令可以看出上传和下载的两个文件的md5指是一样的。
+
+### 5.安装nginx-tfs
+
+>>> 这个模块实现了TFS的客户端，为TFS提供了RESTful API. 
+
+#### 安装编译
+
+```sh
+#TFS模块使用了一个开源JSON库来支持JSON,需要安装[yajl](https://codeload.github.com/lloyd/yajl/legacy.tar.gz/2.1.0)
+cd yajl
+./config --prefix=/usr/local/yajl
+make
+make install
+
+#下载[nginx](nginx.org)
+cd nginx
+./configure --add-module=/path/nginx-tfs
+make
+make install
+```
+
+下面是nginx的配置具体可以参考[文档](https://github.com/alibaba/nginx-tfs)
+
+```sh
+#nginx配置示例
+http {
+    tfs_upstream tfs_rc {
+        server 127.0.0.1:6100;
+        type rcs;
+        rcs_zone name=tfs1 size=128M;
+        rcs_interface eth0;
+        rcs_heartbeat lock_file=/logs/lk.file interval=10s;
+    }
+
+    server {
+          listen       7500;
+          server_name  localhost;
+
+          tfs_keepalive max_cached=100 bucket_count=10;
+          tfs_log "pipe:/usr/sbin/cronolog -p 30min /path/to/nginx/logs/cronolog/%Y/%m/%Y-%m-%d-%H-%M-tfs_access.log";
+
+          location / {
+              tfs_pass tfs://tfs_rc;
+          }
+    }
+}
+```
+
