@@ -6,8 +6,8 @@
 ### 1.环境
 
 * os:centos 6.8
-* gcc:gcc 4.4
-* 
+* gcc:gcc 4.4 
+* gcc-c++:c++ 4.4
 
 ### 2.安装步骤
 
@@ -38,6 +38,9 @@ yum install libuuid-devel
 第6步的问题是源里没有找到`google-perftools.x86_64` 这个软件，而去下载的话又需要翻墙，这里提供百度网盘的链接[google-perftools](https://pan.baidu.com/s/1sl7uUdf) 下载完成后按照如下方式安装：
 
 ```sh
+cd perftools
+# 如果没有安装g++的话需要安装，centos不是g++而是gcc-c++
+yum install gcc-c++
 ./configure  --enable-frame-pointers  
 make &&  make install  
 echo "/usr/local/lib" > /etc/ld.so.conf.d/usr_local_lib.conf 
@@ -47,7 +50,7 @@ ldconfig
 #### 2.安装淘宝的工具库tb-common-utils
 
 ```sh
-# 新建一个目录并下载源码，这里需要下载的版本是18
+# 新建一个目录并下载源码，这里需要下载的版本是18,可能需要安装svn, yum install subversion
 svn co -r 18 http://code.taobao.org/svn/tb-common-utils/trunk tb-common-utils
 # 设置环境变量TBLIB_ROOT，我是在root用户下想给所有人用所以在/etc/profile里添加
 export TBLIB_ROOT=/usr/local/tb/tbtools
@@ -71,6 +74,7 @@ make install
 ```
 
 不出意外的换上面的步骤能够成功的安装TFS，那么你在安装目录`/usr/local/tb/tfs` 中应该出现下面几个子目录：
+
 * bin：包含tfs所有的可执行程序文件，如nameserver(NS)、dataserver(DS)、tfstool。
 * conf：包含tfs的配置文件，如NS的配置文件ns.conf，DS的配置文件ds.conf,一开始里面是空的将源码里的conf 拷贝过来就好。
 * include：包含TFS客户端库相关的头文件，应用程序使用TFS需要包含这些头文件。
@@ -89,8 +93,37 @@ make install
 ```sh
 cd /usr/local/tb/tfs/scripts
 ./stfs format 1				#格式化/home/lele/tfs/disk
+#格式化的输出可能如下信息：
+#format ds 1 SUCCESSFULLY 
+# mount name: /home/lele/tfs/disk1 max mount size: 1048576 base fs type: 1 superblock reserve offset: 0 main block size: 75497472 extend block size: 4194304 block ratio: 0.5 file system version: 1 avg inner file size: 15360 hash slot ratio: 0.5
+# [2016-09-04 16:19:58] INFO  blockfile_manager.cpp:1091 [139634781468448] super block mount point: /home/lele/tfs/disk1.
+# [2016-09-04 16:19:58] INFO  blockfile_manager.cpp:1171 [139634781468448] cal block count. avail data space: 1068178368, main block count: 12, ext block count: 25
+# tag TAOBAO
+# mount time 1472977198
+# mount desc /home/lele/tfs/disk1
+# max use space 1073741824
+# base filesystem 1
+# superblock reserve 0
+# bitmap start offset 324
+# avg inner file size 15360
+# block type ratio 0.5
+# main block count 12
+# main block size 75497472
+# extend block count 25
+# extend block size 4194304
+# used main block count 0
+# used extend block count 0
+# hash slot ratio 0.5
+# hash slot size 2730
+# first mmap size 122880
+# mmap size step 4096
+# max mmap size 3686400
+# version 1
+# [2016-09-04 16:19:58] INFO  blockfile_manager.cpp:1213 [139634781468448] cal bitmap count. item count: 38, slot count: 5
 ./tfs start_ns				#启动nameserver
+#  nameserver is up SUCCESSFULLY pid: 6365
 ./tfs start_ds 1			#启动dataserver
+# dataserver 1 is up SUCCESSFULLY pid: 6432
 ```
 
 #### 上传和下载文件
@@ -106,9 +139,19 @@ cd /usr/local/tb/tfs/bin
 ```sh
 cd /usr/local/tb/tfs/bin
 ./tfstool -s 192.168.1.127:8101 -i "get T** file"
+# 如果上传失败会看到： put ../testt =>  fail.
+# 如果上传成功会看到： put ../testt => T19RETByJT1RCvBVdK success  这里的T开头的字符串就是上传后的文件名
 ```
 
 我们可以将文件获取下来名字为`file` 然后我通过`md5sum` 指令可以看出上传和下载的两个文件的md5指是一样的。
+
+```sh
+cd /usr/local/tb/tfs/bin
+./tfstool -s 192.168.0.101:8100 -i "get T19RETByJT1RCvBVdK testt"
+#如果成功的话会看到： fetch T19RETByJT1RCvBVdK => testt success. 
+```
+
+上面基本上完成了对tfs的最普通的操作，但是使用起来很是麻烦，下面就来搭建nginx的RESTfull 接口。
 
 ### 5.安装nginx-tfs
 
@@ -124,8 +167,12 @@ make
 make install
 
 #下载[nginx](nginx.org)
+# 这里需要注意的是在测试中发现如果nginx的版本高于1.4那么会发生下面错误：
+# ngx_http_tfs.c:874: error: too few arguments to function ‘c->recv_chain’
+# 但是1.4和其一下版本不会报这个错误，这里我选用的是1.4.7版本
 cd nginx
 ./configure --add-module=/path/nginx-tfs
+# 这里可能需要你安装pcre的库：  yum install pcre-devel.x86_64
 make
 make install
 ```
@@ -136,7 +183,7 @@ make install
 #nginx配置示例
 http {
     tfs_upstream tfs_rc {
-        server 127.0.0.1:6100;
+        server 127.0.0.1:8100;
         type rcs;
         rcs_zone name=tfs1 size=128M;
         rcs_interface eth0;
@@ -148,7 +195,7 @@ http {
           server_name  localhost;
 
           tfs_keepalive max_cached=100 bucket_count=10;
-          tfs_log "pipe:/usr/sbin/cronolog -p 30min /path/to/nginx/logs/cronolog/%Y/%m/%Y-%m-%d-%H-%M-tfs_access.log";
+		  #tfs_log "pipe:/usr/sbin/cronolog -p 30min /path/to/nginx/logs/cronolog/%Y/%m/%Y-%m-%d-%H-%M-tfs_access.log";
 
           location / {
               tfs_pass tfs://tfs_rc;
@@ -156,4 +203,22 @@ http {
     }
 }
 ```
+
+启动nginx
+---------
+
+```sh
+cd /usr/local/nginx/sbin
+./nginx -t -c /usr/local/nginx/conf/nginx.conf
+```
+
+上传一个图片在集群
+
+```sh
+cd /usr/local/tb/tfs/bin
+./tfstool -s 192.168.0.101:8100 -i "put /root/touxiang.jpg"
+# put /root/touxiang.jpg => T19yETByJT1RCvBVdK success.
+```
+
+然后在浏览器里输入 `http://192.168.0.101:7500/v1/tfs/T19yETByJT1RCvBVdK` 这样就可以看到我们上传的文件了
 
