@@ -35,4 +35,7 @@ git config --global color.branch auto
 
 git的常用指令
 ------------
-
+```sh
+# 将误加入版本库的文件给删除，但是在本地还是保留
+git rm --cache <file>
+```
