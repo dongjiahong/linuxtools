@@ -48,11 +48,13 @@ if (num != 0) {
 
 #### lua中的一些规范和技巧
 ##### 对于变量的判断
-ngx_lua里面创造了一种userdata叫做ngx.null，用于表示“空指针”
-例如，json的字符串形式是：{"data":null}
-根据json标准，null是一种类型，不是string，所以在lua里面就是 obj.data == ngx.null
-你之前写的判断，是处理这种情况的：{"data":"null"}
-obj.data == "null"
+ngx_lua里面创造了一种userdata叫做`ngx.null` ,用于表示“空指针”
+例如，json的字符串形式是：`{"data":null}`
+根据json标准，null是一种类型，不是string，所以在lua里面就是 `obj.data == ngx.null`
+你之前写的判断，是处理这种情况的：`{"data":"null"}`
+`obj.data == "null"`
+
+在ngx_lua中如果你想用http的状态码作为返回值的参考依据，那么你将在使用`ngx.say` 、`ngx.print`等函数，这些函数会将`ngx.status`设置为200，这时你再使用`ngx.status = ngx.HTTP_NOT_FOUND`将会报错
 ##### 对于包的引用
 由于lua为了提高效率，所以当你引入包时他会帮你缓存起来，这个过程是比较消耗cpu的，但是以后就会快了所以呢，我们就尽量的把包的引用放在文件的头处。
 ##### 命名规则
