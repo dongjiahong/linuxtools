@@ -48,4 +48,8 @@ git stash apply stash_id
 git stash pop
 # 清空git内部栈
 git stash clear
+# push推送指令 
+git push <远程仓库> <本地分支>:<远程分支>
+# pull拉取指令
+git pull <远程仓库> <远程分支>:<本地分支>
 ```
