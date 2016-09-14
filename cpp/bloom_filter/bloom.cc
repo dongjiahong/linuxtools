@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Bloom::Bloom(int size, vector<HashFun*> hash_func_list) {
+Bloom::Bloom(const int &size, vector<HashFun*> hash_func_list) {
 	assert(hash_func_list.size() > 0);
 	this->size = size;
 	this->hash_func_list = hash_func_list;

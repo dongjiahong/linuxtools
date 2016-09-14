@@ -2,13 +2,13 @@
 #define __BLOOM_H__
 
 #include <vector>
-#include "hash_fun.h"
+#include "hashfun.h"
 
 using namespace std;
 
 class Bloom {
 public:
-	Bloom(int size, std::vector<HashFun*> hash_func_list);
+	Bloom(const int &size, std::vector<HashFun*> hash_func_list);
 	~Bloom();
 	void add(const char* text);
 	bool check(const char *text);
