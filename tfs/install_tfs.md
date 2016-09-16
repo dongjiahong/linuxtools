@@ -170,6 +170,7 @@ make install
 # 这里需要注意的是在测试中发现如果nginx的版本高于1.4那么会发生下面错误：
 # ngx_http_tfs.c:874: error: too few arguments to function ‘c->recv_chain’
 # 但是1.4和其一下版本不会报这个错误，这里我选用的是1.4.7版本
+# 这里提供一个修改版[修改版nginx_tfs](https://github.com/hltj/nginx-tfs)
 cd nginx
 ./configure --add-module=/path/nginx-tfs
 # 这里可能需要你安装pcre的库：  yum install pcre-devel.x86_64
@@ -177,7 +178,7 @@ make
 make install
 ```
 
-下面是nginx的配置具体可以参考[文档](https://github.com/alibaba/nginx-tfs)
+下面是nginx的配置具体可以参考[文档](https://github.com/alibaba/nginx-tfs), [修改版nginx_tfs](https://github.com/hltj/nginx-tfs)修改版的支持更高的nginx而不报错
 
 ```sh
 #nginx配置示例
@@ -222,3 +223,26 @@ cd /usr/local/tb/tfs/bin
 
 然后在浏览器里输入 `http://192.168.0.101:7500/v1/tfs/T19yETByJT1RCvBVdK` 这样就可以看到我们上传的文件了
 
+### 安装openresty
+由于公司没有直接使用nginx而是使用了`openresty` 这里的安装方式类似，我们先去下载[openresty](https://openresty.org/download/openresty-1.11.2.1.tar.gz)和[修改版nginx_tfs](https://github.com/hltj/nginx-tfs)，然后在执行如下命令：
+
+```sh
+./configure --prefix=/opt/openresty \
+	--with-luajit \
+	--without-http_redis2_module \
+	--with-http_iconv_module \
+	--with-http_postgres_module \
+	--add-module=../nginx-tfs-master
+```
+
+但是你可能得到下面的错误：
+
+```sh
+ ./configure: error: ngx_postgres addon was unable to detect version of the libpq library.
+ ERROR: failed to run command: sh ./configure --prefix=/opt/openresty/nginx \...
+```
+
+解决办法：
+```sh
+yum install postgresql-devel
+```
