@@ -11,4 +11,15 @@ Linux日常运维日志
 ```
 还有一个问题是，一但你修改了这个libc.so.6的软链，yum就不能用了，就想上面的问题，可以使用`yum clean all` 解决，但是这样`libc.so.6`的软链将会被修改回去
 
+### 防火墙iptables
+防火墙的配置在文件`/etc/sysconfig/iptables` 
+公司里默认是只有`22`端口给打开的别的都给墙了，所以如果你想用一个自己定义的端口,那么需要打开防火墙在防火墙里添加如下一条信息
+```sh
+# 65000 是我自定义的端口
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 65000 -j ACCEPT 
+```
+当添加白名单后需要更新防火墙`iptables`执行下面指令
+```sh
+service iptables restart
+```
 
