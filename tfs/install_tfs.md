@@ -82,7 +82,7 @@ make install
 * logs：用于存储TFS运行过程中的日志。
 * script：包含tfs常用的一些运维脚本，如stfs用于格式化DS， tfs启动/停止NS、DS。
 
-### 4.部署TFS
+### 4.部署TFS --原版
 
 部署TFS可以参考[单机部署TFS](http://blog.chinaunix.net/uid-30047365-id-4669845.html)
 
@@ -121,8 +121,12 @@ cd /usr/local/tb/tfs/scripts
 # version 1
 # [2016-09-04 16:19:58] INFO  blockfile_manager.cpp:1213 [139634781468448] cal bitmap count. item count: 38, slot count: 5
 ./tfs start_ns				#启动nameserver
+# 或者使用下面的，如果上面的失败
+./bin/nameserver -f conf/ns.conf -d
 #  nameserver is up SUCCESSFULLY pid: 6365
-./tfs start_ds 1			#启动dataserver
+./script/tfs start_ds 1-2  #序号的使用与stfs类似，可通过","分隔序号，通过"-"指定范围序列
+# 或者使用下面的指令启动
+./bin/dataserver -f conf/ds.conf -i 1 -d
 # dataserver 1 is up SUCCESSFULLY pid: 6432
 ```
 
@@ -152,6 +156,8 @@ cd /usr/local/tb/tfs/bin
 ```
 
 上面基本上完成了对tfs的最普通的操作，但是使用起来很是麻烦，下面就来搭建nginx的RESTfull 接口。
+
+
 
 ### 5.安装nginx-tfs
 
