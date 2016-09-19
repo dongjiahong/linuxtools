@@ -168,7 +168,7 @@ cd /usr/local/tb/tfs/bin
 ```sh
 #TFS模块使用了一个开源JSON库来支持JSON,需要安装[yajl](https://codeload.github.com/lloyd/yajl/legacy.tar.gz/2.1.0)
 cd yajl
-./config --prefix=/usr/local/yajl
+./configure --prefix=/usr/local/yajl
 make
 make install
 
@@ -191,10 +191,11 @@ make install
 http {
     tfs_upstream tfs_rc {
         server 127.0.0.1:8100;
-        type rcs;
-        rcs_zone name=tfs1 size=128M;
-        rcs_interface eth0;
-        rcs_heartbeat lock_file=/logs/lk.file interval=10s;
+		type ns;
+		#        type rcs;
+		#        rcs_zone name=tfs1 size=128M;
+		#        rcs_interface eth0;
+		#        rcs_heartbeat lock_file=/logs/lk.file interval=10s;
     }
 
     server {
