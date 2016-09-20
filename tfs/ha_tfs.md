@@ -11,4 +11,17 @@
 # 执行上面的指令后我们在次安装就好了，这里安装的是3.0版本
 # yum install heartbeat
 ```
+#### 设置虚拟ip
+我们先查看目前的本机ip信息
+```sh
+# ifconfig 
+inet addr:10.21.13.21  Bcast:10.21.15.255  Mask:255.255.240.0
+
+# 配置虚拟ip
+ifconfig eth0:0 10.21.13.100 netmask 255.255.240.0 up
+
+# 再次查看 ifconfig
+eth0:0    Link encap:Ethernet  HWaddr 06:48:AA:67:1E:65  
+          inet addr:10.21.13.100  Bcast:10.21.15.255  Mask:255.255.240.0
+```
 

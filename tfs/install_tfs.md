@@ -155,8 +155,12 @@ cd /usr/local/tb/tfs/bin
 #如果成功的话会看到： fetch T19RETByJT1RCvBVdK => testt success. 
 ```
 
-上面基本上完成了对tfs的最普通的操作，但是使用起来很是麻烦，下面就来搭建nginx的RESTfull 接口。
+往TFS存储一个文件后，TFS的客户端会返回一个T开头的文件名，通过该文件名就能从TFS里读到存储的文件。
+同时TFS支持用户自定义文件名，但需要部署metaserver和rootserver，metaserver依赖mysql来存储“用户自定
+义文件名”到“TFS文件名”的映射关系，rootserver用来管理多个metaserver。
+自定义文件名提供create_dir、create_file、ls_dir、write_file、read_file、delete_file等接口。
 
+上面基本上完成了对tfs的最普通的操作，但是使用起来很是麻烦，下面就来搭建nginx的RESTfull 接口。
 
 
 ### 5.安装nginx-tfs

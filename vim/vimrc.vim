@@ -51,6 +51,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'thinca/vim-quickrun'
 
 call vundle#end()
 filetype plugin indent on
@@ -118,3 +119,10 @@ nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
 " 不折叠
 let g:vim_markdown_folding_disable = 1
 
+" ====>QuickRun 的设置<====
+let g:quickrun_config = {
+			\   "_" : {
+			\       "outputter" : "message",
+			\   },
+			\}
+nmap <leader>rr :QuickRun<CR>
