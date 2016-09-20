@@ -52,6 +52,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'thinca/vim-quickrun'
+Plugin 'SuperTab'
 
 call vundle#end()
 filetype plugin indent on
@@ -121,8 +122,13 @@ let g:vim_markdown_folding_disable = 1
 
 " ====>QuickRun 的设置<====
 let g:quickrun_config = {
-			\   "_" : {
-			\       "outputter" : "message",
-			\   },
-			\}
+\   "_" : {
+\       "outputter" : "message",
+\   },
+\}
 nmap <leader>rr :QuickRun<CR>
+" ====>SuperTab<=====
+" 0 - 不记录上次的补全方式
+" 1 - 记住上次的补全方式,直到用其他的补全命令改变它
+" 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
+let g:SuperTabRetainCompletionType=2
