@@ -2,17 +2,25 @@
 
 syntax on			"开启语法高亮
 set nu				"行号        
+
 set hls				"高亮
 set cursorline		"突出当前行
 hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE
 set ruler			"打开状态栏标尺
+
 set tabstop=4		"tab键的宽度为4
 set softtabstop=4	"使用退格键时，一次删除4个空格
 set shiftwidth=4	"设置<<和>>命令移动时的宽度为4
+
 "set cindent			"c风格的换行
 set backspace=2		"mac机器需要开这个能用backspace键
 set nofoldenable	"不折叠
 set autoindent		"自动换行
+
+set colorcolumn=101  "81个字符为竖线
+set textwidth=100	"80个字符一行
+set fo+=mB			"支持汉语
+
 set smartindent		"开启新行时使用智能自动缩进
 set nobackup		"不允许自动备份
 set laststatus=2	"显示状态栏
