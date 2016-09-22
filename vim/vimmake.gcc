@@ -1,0 +1,2 @@
+#!/bin/bash
+gcc "$VIM_FILEPATH" -o "$VIM_FILEDIR/$VIM_FILENOEXT"

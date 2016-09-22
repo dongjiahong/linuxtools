@@ -33,8 +33,12 @@ let g:molokai_original = 1	"1浅色，0深色
 "快捷键
 " 定义快捷键的前缀，即<Leader>
 let mapleader=","
+" 输入,co快速打开quickfix
+nmap <leader>qo :copen<cr>
+" 输入,cc快速关闭quickfix
+nmap <leader>qc :cclose<cr>
 " 输入,ee 就是打开.vimrc
-nmap <leader>ee :e ~/.vimrc<cr>	
+"nmap <leader>ee :e ~/.vimrc<cr>	
 
 "安装：
 "	1、使用git下载vundle
@@ -59,8 +63,9 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'thinca/vim-quickrun'
+Plugin 'skywind3000/vimmake'
 Plugin 'SuperTab'
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()
 filetype plugin indent on
@@ -128,15 +133,26 @@ nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
 " 不折叠
 let g:vim_markdown_folding_disable = 1
 
-" ====>QuickRun 的设置<====
-let g:quickrun_config = {
-\   "_" : {
-\       "outputter" : "message",
-\   },
-\}
-nmap <leader>rr :QuickRun<CR>
 " ====>SuperTab<=====
 " 0 - 不记录上次的补全方式
 " 1 - 记住上次的补全方式,直到用其他的补全命令改变它
 " 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
 let g:SuperTabRetainCompletionType=2
+
+" ====>vimmake<=====
+let g:vimmake_path = '~/.vim/vimmake'
+" 模式
+" normal   默认模式，运行工具并等待结束后返回vim（win下弹出窗口运行，不必等待）
+" quickfix 运行工具并等待结束后返回vim，把结果输出到 quickfix
+" bg       在后台运行工具，并且忽略任何输出。
+" async    异步任务方式在后台运行工具，并且把输出实时显示在 quickfix中
+let g:vimmake_mode = {}
+let g:vimmake_mode['gcc'] = 'async'
+let g:vimmake_mode['run'] = 'async'
+
+nmap <leader>rr :VimTool run<CR>
+
+augroup QuickfixStatus
+	au! BufWinEnter quickfix setlocal 
+		\ statusline=%t\ [%{g:vimmake_build_status}]\ %{exists('w:quickfix_title')?\ '\ '.w:quickfix_title\ :\ ''}\ %=%-15(%l,%c%V%)\ %P
+augroup END
