@@ -151,7 +151,9 @@ let g:vimmake_mode['gcc'] = 'async'
 let g:vimmake_mode['run'] = 'async'
 
 nmap <leader>rr :VimTool run<CR>
+nmap <leader>gcc :VimTool gcc<CR>
 
+" 在quickfix窗口显示后天执行状态
 augroup QuickfixStatus
 	au! BufWinEnter quickfix setlocal 
 		\ statusline=%t\ [%{g:vimmake_build_status}]\ %{exists('w:quickfix_title')?\ '\ '.w:quickfix_title\ :\ ''}\ %=%-15(%l,%c%V%)\ %P
