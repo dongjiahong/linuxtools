@@ -17,8 +17,8 @@ set backspace=2		"mac机器需要开这个能用backspace键
 set nofoldenable	"不折叠
 set autoindent		"自动换行
 
-set colorcolumn=101  "81个字符为竖线
-set textwidth=100	"80个字符一行
+set colorcolumn=101  "101个字符为竖线
+set textwidth=100	"100个字符一行
 set fo+=mB			"支持汉语
 
 set smartindent		"开启新行时使用智能自动缩进
@@ -66,6 +66,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'skywind3000/vimmake'
 Plugin 'SuperTab'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'elzr/vim-json'
 
 call vundle#end()
 filetype plugin indent on
@@ -138,6 +139,8 @@ let g:vim_markdown_folding_disable = 1
 " 1 - 记住上次的补全方式,直到用其他的补全命令改变它
 " 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
 let g:SuperTabRetainCompletionType=2
+" 支持json的语法高亮，这里需要安装json的语法高亮插件
+let g:vim_markdown_json_frontmatter = 1
 
 " ====>vimmake<=====
 let g:vimmake_path = '~/.vim/vimmake'
@@ -158,3 +161,6 @@ augroup QuickfixStatus
 	au! BufWinEnter quickfix setlocal 
 		\ statusline=%t\ [%{g:vimmake_build_status}]\ %{exists('w:quickfix_title')?\ '\ '.w:quickfix_title\ :\ ''}\ %=%-15(%l,%c%V%)\ %P
 augroup END
+
+" ====>json<=====
+let g:vim_json_syntax_conceal = 0
