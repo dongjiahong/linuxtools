@@ -17,10 +17,10 @@ target2: prerequiries
 ```make
 VPATH = src:../headers
 
-variable = deferred
-variable ?= deferred
-variable := deferred
-variable += deferred or variable
+variable = deferred #基本赋值会将整个makefile展开后再决定变量值
+variable := deferred #覆盖之前的赋值,直接赋值而不是跟上面一样要完全展开makefile
+variable ?= deferred #条件赋值操作符,只有此变量在之前没有赋值的情况下才会赋值
+variable += deferred or variable #对变量进行追加操作
 
 define variable
 	deferred
@@ -62,6 +62,20 @@ b:
 #上面的$@表示make指令时后面跟的目标，
 #$^表示依赖列表就是a b c，
 #$<表示依赖列表的第一个依赖就是a
+#上面的echo命令前面使用@符号表示echo b这条命令不回显,当然如果你使用了-s选项即：`make -s`那么所有的都
+#不回显
+```
+
+内建的特殊变量名
+```make
+.PHONY: xxx
+#phony的依赖是假想目标，make将会无条件的执行它的命令；跟他的依赖是否更新么有关系
+.SUFFIXES: xxx
+#特殊目標.SUFFIXES 的依賴是一列用於尾碼規則檢查的尾碼。
+.DEFAULT: xxx
+#指定一些命令,這些命令用於那些沒有找到規則(具體規則或隱含規則)更新的目標
+.
+
 ```
 
 ### 3.指令
@@ -100,4 +114,37 @@ foo:$(object)
 * vpath目录下
 * VPATH目录下
 * 以及`/lib`、`/usr/lib`、`prefix/lib`一般prefix为`/usr/local/lib`
-中依次去寻找名字为`libname.so`的文件，如果没有找到会寻找`libname.a`文件
+中依次去寻找名字为`libname.so`的文件，如果没有找到会寻找`libname.a`文件。它其实使用了一个
+`.LIBPATTERNS`的变量，这个变量的默认值："lib%.so lib%.a",该值对前面描述的缺省行为提供支持。
+
+#### 6.2假想目标
+假想目标并不是一个正真的文件名，它仅仅是制定一个具体规则所执行的一些命令的名称，使用假想目标有两个原
+因：避免和具有相同名称的文件冲突和改善性能。假想目标声明为`.PHONY: clean`一旦你这样声明，`make clean`
+命令无论目录下是否存在名為clean的文件,該目標的命令都會執行。
+
+#### 6.3命令的执行
+make给每条shell命令一个独立的环境，这就意味着命令之间相互不影响；如果你的命令之间需要用相同的环境
+那么请将两个命令放在同一行并用分号进行分割就好
+```make
+foo:
+	cd xxx/xxx; touch xxx
+
+bar:
+	cd xxx/xxx
+	touch xxx
+```
+
+上面的两个例子是不同的foo将会在`xxx/xxx`建立`xxx`文件；而bar会在当前目录建立xxx文件
+#### 6.4忽略命令错误
+当make中的shell指令执行出错，那么会将整个make给中断，如果这个并不是一个重要的命令，那么这次中断将不是
+我们所希望的这时可以用`-`字符加载shell命令前以忽略错误
+```make
+foo: aa
+	echo aa
+aa:
+	#rm xx
+	-rm xx
+```
+
+上面的例子中如果aa的指令rm没有发现xx那么将会中断也就是看不到aa了，但是如果使用`-`字符，将会忽略命令的
+错误继续执行`echo aa`
