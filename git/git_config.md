@@ -52,4 +52,6 @@ git stash clear
 git push <远程仓库> <本地分支>:<远程分支>
 # pull拉取指令
 git pull <远程仓库> <远程分支>:<本地分支>
+# merge,将分支dev合并到分支master， 先checkout master
+git merge dev
 ```
