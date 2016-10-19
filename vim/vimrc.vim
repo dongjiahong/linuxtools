@@ -18,7 +18,7 @@ set nofoldenable	"不折叠
 set autoindent		"自动换行
 
 set colorcolumn=101  "101个字符为竖线
-set textwidth=100	"100个字符一行
+"set textwidth=100	"100个字符一行,自动换行
 set fo+=mB			"支持汉语
 
 set smartindent		"开启新行时使用智能自动缩进
