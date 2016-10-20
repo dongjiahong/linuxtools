@@ -60,6 +60,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tomasr/molokai'
+
+" go get -u github.com/jstemmer/gotags  让tagbar支持go
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
