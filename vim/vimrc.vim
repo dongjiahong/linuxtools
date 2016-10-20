@@ -2,7 +2,6 @@
 
 syntax on			"开启语法高亮
 set nu				"行号        
-
 set hls				"高亮
 set cursorline		"突出当前行
 hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE
@@ -60,8 +59,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tomasr/molokai'
-
-" go get -u github.com/jstemmer/gotags  让tagbar支持go
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
@@ -73,7 +70,7 @@ Plugin 'SuperTab'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'elzr/vim-json'
 
-Plugin 'Blackrush/vim-gocode'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'dgryski/vim-godef'
 
 call vundle#end()
@@ -133,6 +130,9 @@ let g:syntastic_cpp_check_header = 1
 
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libstdc++'
+
+" golint   go get github.com/golang/lint && go install github.com/golang/lint
+let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
 
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
@@ -202,3 +202,5 @@ augroup END
 " ====>json<=====
 let g:vim_json_syntax_conceal = 0
 
+" ====>golang<=====
+let g:go_fmt_fail_silently = 1 
