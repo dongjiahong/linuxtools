@@ -12,17 +12,20 @@ set tabstop=4		"tab键的宽度为4
 set softtabstop=4	"使用退格键时，一次删除4个空格
 set shiftwidth=4	"设置<<和>>命令移动时的宽度为4
 
+set completeopt=menu "关闭scratch 
+
 "set cindent			"c风格的换行
 set backspace=2		"mac机器需要开这个能用backspace键
 set nofoldenable	"不折叠
 set autoindent		"自动换行
 
-set colorcolumn=101  "101个字符为竖线
-"set textwidth=100	"100个字符一行,自动换行
+set colorcolumn=100  "100个字符为竖线
+"set textwidth=100	"100个字符一行
 set fo+=mB			"支持汉语
 
 set smartindent		"开启新行时使用智能自动缩进
 set nobackup		"不允许自动备份
+
 set laststatus=2	"显示状态栏
 set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
 "下面是对molokai的主题配置,需要将molokai.vim文件拷贝到/usr/share/vim/vim74/colors
@@ -68,6 +71,9 @@ Plugin 'SuperTab'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'elzr/vim-json'
 
+Plugin 'Blackrush/vim-gocode'
+Plugin 'dgryski/vim-godef'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -84,6 +90,35 @@ let Tlist_Exit_OnlyWindow = 1          "如果taglist窗口是最后一个窗口
 let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist窗口 
 "宏，F8打开taglist
 nmap <F8> :TagbarToggle<CR>     
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
 
 "-------->>syntastic<<---------
 "let g:syntastic_always_populate_loc_list = 1
@@ -164,3 +199,4 @@ augroup END
 
 " ====>json<=====
 let g:vim_json_syntax_conceal = 0
+

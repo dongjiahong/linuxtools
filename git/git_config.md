@@ -85,7 +85,7 @@ git stash pop stash@{0}
 ```
 执行上面的内容你可以得到如下类似的信息:
 
-```sh
+```
 Auto-merging src/sender.lua
 CONFLICT (content): Merge conflict in src/sender.lua
 Auto-merging README.md
