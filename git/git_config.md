@@ -49,6 +49,8 @@ git push <远程仓库> <本地分支>:<远程分支>
 git pull <远程仓库> <远程分支>:<本地分支>
 # merge,将分支dev合并到分支master， 先checkout master
 git merge dev
+# 删除本地分支
+git branch -d develop
 ```
 
 ### git的pull冲突
