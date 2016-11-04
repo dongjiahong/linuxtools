@@ -22,4 +22,19 @@ Linux日常运维日志
 ```sh
 service iptables restart
 ```
+### curl指令
+curl指令是我们常用的指令，默认使用`GET`方法如：
+```sh
+curl "www.baidu.com" -v
+```
+
+`-v`选项是说让返回显示详细内容,那么如果我们想使用`POST`方法呢？
+
+```sh
+curl -d "param2=nickwolfe&param2=12345" "http://www.example.com/a1" -v
+```
+没错就是`-d`选项；当然我们也可以使用`-H`来指定请求的头部如：
+```sh
+curl "localhost:22222/appinfo" -H 'Content-Type: application/json' -d '[{"id":1,"app_name":"xyz"},{"id":2,"app_name":"abc"}]' -v
+```
 

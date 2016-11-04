@@ -31,7 +31,7 @@ set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
 set t_Co=256
 colorscheme molokai
 let g:rehash256 = 1 
-let g:molokai_original = 1	"1浅色，0深色 
+let g:molokai_originl = 1	"1浅色，0深色 
 "快捷键
 " 定义快捷键的前缀，即<Leader>
 let mapleader=","
@@ -70,8 +70,10 @@ Plugin 'SuperTab'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'elzr/vim-json'
 
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Plugin 'dgryski/vim-godef'
+Plugin 'fatih/vim-go'
+
+"Plugin 'nsf/gocode', {'rtp': 'vim/'}
+"Plugin 'dgryski/vim-godef'
 
 call vundle#end()
 filetype plugin indent on
@@ -132,7 +134,8 @@ let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libstdc++'
 
 " golint   go get github.com/golang/lint && go install github.com/golang/lint
-let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
+"let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
+let g:syntastic_go_checkers=['govet', 'errcheck']
 
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
@@ -202,5 +205,14 @@ augroup END
 " ====>json<=====
 let g:vim_json_syntax_conceal = 0
 
-" ====>golang<=====
+" ====>vim-go<<=====
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
 let g:go_fmt_fail_silently = 1 
+let g:go_play_open_browser = 0
+let g:go_get_update = 0
