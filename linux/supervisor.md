@@ -57,6 +57,20 @@ supervisor判断是的`command`配置的命令，所以如果你的程序是二�
 `command = ./echo > log 2>&1 &` 而不要用一个脚本包裹这条命令后在`command`中执行那个脚本，这会导致
 服务没法重启。
 
+在`command`中最好将路径都写成绝对路径而不要写相对路径。由于环境变量的问题可能会导致服务部能成功
+
 如果使用`stdout_logfile`字段，后面的路径一定要完整，目录要提前创建好，最后的log文件名称也要给出，
 不然可能会报类似于`INFO spawnerr: unknown error making dispatchers for 'tworker': EISDIR`这样的
 错误.
+
+一般不要在`command`中配置指令时，将日志重定向也给添加到命令中，我们可以使用下面几个指令来代替该
+功能:
+
+```ini
+redirect_stderr = true                  ; 把stderr重定向到stdout,默认是false                           
+stdout_logfile_maxbytes = 20MB  ; stdout 日志文件大小，默认 50MB                                       
+stdout_logfile_backups = 20     ; stdout 日志文件备份数                                                
+; stdout 日志文件，需要注意当指定目录不存在时无法正常启动，所以需要手动创建目录（supervisord 会自动创建日志文件）
+stdout_logfile = /Users/lele/tmp/supervisor/example_stdout.log 
+```
+这样就将日志重定向输出到log中了。
