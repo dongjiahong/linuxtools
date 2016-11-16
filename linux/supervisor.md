@@ -56,3 +56,7 @@ stdout_logfile = /Users/lele/tmp/supervisor/example_stdout.log
 supervisor判断是的`command`配置的命令，所以如果你的程序是二进制可执行程序就向如下：
 `command = ./echo > log 2>&1 &` 而不要用一个脚本包裹这条命令后在`command`中执行那个脚本，这会导致
 服务没法重启。
+
+如果使用`stdout_logfile`字段，后面的路径一定要完整，目录要提前创建好，最后的log文件名称也要给出，
+不然可能会报类似于`INFO spawnerr: unknown error making dispatchers for 'tworker': EISDIR`这样的
+错误.
