@@ -51,10 +51,13 @@ git pull <远程仓库> <远程分支>:<本地分支>
 git merge dev
 # 删除本地分支
 git branch -d develop
+# git diff [<options>] [<commit> [<commit>]] [--] [<path>...]
+git diff commit1 commit2
 ```
 
 ### git的pull冲突
 在使用`git pull`代码时，经常会碰到有冲突的情况，如下提示:
+
 ```sh
 error: Your local changes to 'c/environ.c' would be overwritten by merge.  Aborting.
 Please, commit your changes or stash them before you can merge.
@@ -76,6 +79,7 @@ stash@{0}: WIP on master: a80c24d
 
 #### 2.pull内容
 暂存了本地修改后，就可以pull了。
+
 ```sh
 git pull
 ```
@@ -96,6 +100,7 @@ Auto-merging README.md
 
 #### 4.解决文件中的冲突部分
 打开冲突的文件，会看到类似如下的内容：
+
 ```sh
 <<<<<<< Update upstream
 	int i, j;
