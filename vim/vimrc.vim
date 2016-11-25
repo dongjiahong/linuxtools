@@ -59,21 +59,30 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tomasr/molokai'
-Plugin 'majutsushi/tagbar'
+
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
+
 Plugin 'godlygeek/tabular'
+
 Plugin 'plasticboy/vim-markdown'
-Plugin 'skywind3000/vimmake'
-Plugin 'SuperTab'
-Plugin 'terryma/vim-multiple-cursors'
+
 Plugin 'elzr/vim-json'
 
+Plugin 'skywind3000/vimmake'
+
+Plugin 'SuperTab'
+
+Plugin 'terryma/vim-multiple-cursors'
+
+
+" golang
 Plugin 'fatih/vim-go'
 
-"Plugin 'nsf/gocode', {'rtp': 'vim/'}
-"Plugin 'dgryski/vim-godef'
+" Lua 
+Bundle 'xolox/vim-misc' 
+Bundle 'xolox/vim-lua-ftplugin' 
 
 call vundle#end()
 filetype plugin indent on
@@ -122,9 +131,6 @@ let g:tagbar_type_go = {
 
 
 "-------->>syntastic<<---------
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 "let g:syntastic_cpp_remove_include_errors = 1
@@ -136,6 +142,7 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libstdc++'
 " golint   go get github.com/golang/lint && go install github.com/golang/lint
 "let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
 let g:syntastic_go_checkers=['govet', 'errcheck']
+"let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
@@ -210,9 +217,32 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
 let g:go_fmt_fail_silently = 1 
 let g:go_play_open_browser = 0
 let g:go_get_update = 0
+
+au FileType go nmap <leader>gr <Plug>(go-run)
+"au FileType go nmap <leader>b <Plug>(go-build)
+"au FileType go nmap <leader>t <Plug>(go-test)
+"au FileType go nmap <leader>c <Plug>(go-coverage)
+
+au FileType go nmap <Leader>gd <Plug>(go-def-split)
+"au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+"au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+
+
+" =====>lua<=======
+" This sets the default value for all buffers.
+let g:lua_compiler_name = '/usr/local/bin/luac'
+
+" This is how you change the value for one buffer.
+"let b:lua_compiler_name = '/usr/local/bin/lualint'
+
+" 关闭语法检查 
+" let g:lua_check_syntax = 0
+" desable Lua compiler to check for undefined global variables
+" let g:lua_check_globals = 0
+
