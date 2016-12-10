@@ -62,7 +62,7 @@ Plugin 'tomasr/molokai'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 
 Plugin 'godlygeek/tabular'
 
@@ -76,9 +76,12 @@ Plugin 'SuperTab'
 
 Plugin 'terryma/vim-multiple-cursors'
 
+" YouCompleteMe
+Plugin 'Valloric/YouCompleteMe'
 
 " golang
-Plugin 'fatih/vim-go'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'dgryski/vim-godef'
 
 " Lua 
 Bundle 'xolox/vim-misc' 
@@ -148,34 +151,18 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 
 
+" --------YouComplateMe----------
+let g:ycm_confirm_extra_conf = 0
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 "映射分割屏幕的快捷键 Ctrl+h 往左屏切,Ctrl+j往上切等
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-"------------->cscope<------------
-if has("cscope")
-  set csprg=/usr/bin/cscope
-  set csto=1
-  set cst
-  set nocsverb
-  " add any database in current directory
-  if filereadable("cscope.out")
-      cs add cscope.out
-  endif
-  set csverb
-endif
-
-"快捷键的配置，这里输入",ss"就是执行cs find s world 命令
-nmap <leader>ss :cs find s<C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sc :cs find c <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>st :cs find t <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sf :cs find f<C-R>=expand("<cfile>")<cr><cr>
-nmap <leader>si :cs find i<C-R>=expand("<cfile>")<cr><cr>
-nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
 
 " ====>markdown 的设置<====
 " 不折叠
@@ -211,28 +198,6 @@ augroup END
 
 " ====>json<=====
 let g:vim_json_syntax_conceal = 0
-
-" ====>vim-go<<=====
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_build_constraints = 1
-
-let g:go_fmt_fail_silently = 1 
-let g:go_play_open_browser = 0
-let g:go_get_update = 0
-
-au FileType go nmap <leader>gr <Plug>(go-run)
-"au FileType go nmap <leader>b <Plug>(go-build)
-"au FileType go nmap <leader>t <Plug>(go-test)
-"au FileType go nmap <leader>c <Plug>(go-coverage)
-
-au FileType go nmap <Leader>gd <Plug>(go-def-split)
-"au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-"au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-
-
 
 " =====>lua<=======
 " This sets the default value for all buffers.
