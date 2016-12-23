@@ -61,8 +61,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tomasr/molokai'
 
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/nerdcommenter'
-"Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 
 Plugin 'godlygeek/tabular'
 
@@ -153,8 +154,8 @@ let g:syntastic_warning_symbol = '⚠'
 
 " --------YouComplateMe----------
 let g:ycm_confirm_extra_conf = 0
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+"nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+"nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "映射分割屏幕的快捷键 Ctrl+h 往左屏切,Ctrl+j往上切等
