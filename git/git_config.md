@@ -112,3 +112,29 @@ Auto-merging README.md
 其中`Update upstream`和`=======`之间的内容是`pull`下来的内容，`=======`和`Stashed
 changes`之间的内容就是本地修改的内容，碰到这样的情况，git也不知道如何解决，需要你
 自己解决后就可以正常提交了。
+
+### git仓库迁移
+如果你有项目本来在gitos上，但是现在想github上可以使用如下流程
+
+1.查看现有git情况
+```
+# git remote -v
+origin	git@git.oschina.net:CloudTech/render_king.git (fetch)
+origin	git@git.oschina.net:CloudTech/render_king.git (push)
+```
+
+2.添加github的仓库链接
+```
+# git remote add github git@github.com:xxxxx/xxxxx.git
+# git remote -v 
+github	git@github.com:cloudadrd/render_king.git (fetch)
+github	git@github.com:cloudadrd/render_king.git (push)
+origin	git@git.oschina.net:CloudTech/render_king.git (fetch)
+origin	git@git.oschina.net:CloudTech/render_king.git (push)
+```
+
+3.将代码上传到github仓库，注意所对应的分支
+```
+git push -u github master:master
+git push -u github develop:develop
+```
