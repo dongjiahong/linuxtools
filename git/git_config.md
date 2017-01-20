@@ -53,6 +53,8 @@ git merge dev
 git branch -d develop
 # git diff [<options>] [<commit> [<commit>]] [--] [<path>...]
 git diff commit1 commit2
+# 合并其他分支的文件git checkout -p, --patch  select hunks interactively
+git checkout -p example src/a.h  # 不切换分支，将example分支下，src/a.h文件合并到本分支
 ```
 
 ### git的pull冲突
