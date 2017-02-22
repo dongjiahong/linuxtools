@@ -33,6 +33,10 @@ git config --global color.branch auto
 ```sh
 # 将误加入版本库的文件给删除，但是在本地还是保留 这里要加--cache
 git rm --cache <file>
+# 将错误的本地commit取消,但是修改的文件还在
+git reset commit_id
+# 将错误的本地commit取消，代码回到reset的版本状态
+git reset --hard commit_id
 # 将工作区文件保存在git的内部栈中
 git stash
 # 列出git内部栈中保存的工作区文件列表

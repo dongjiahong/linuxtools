@@ -38,3 +38,17 @@ curl -d "param2=nickwolfe&param2=12345" "http://www.example.com/a1" -v
 curl "localhost:22222/appinfo" -H 'Content-Type: application/json' -d '[{"id":1,"app_name":"xyz"},{"id":2,"app_name":"abc"}]' -v
 ```
 
+### vmstat
+使用`vmstat`命令来查看机器当前的任务状态使用方式 `vmstat n`其中n是数字表示刷新频率
+
+```
+procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
+r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+2  0      0 1786124  14536 13011576    0    0     1   155   51  106 18  4 79  0  0	
+5  0      0 1783380  14536 13013116    0    0     0    20 45871 16803 41 15 43  0  1	
+1  0      0 1781892  14544 13014880    0    0     0    12 47247 17795 36 16 47  0  1	
+1  0      0 1781148  14552 13015988    0    0     0    12 45041 17319 33 12 54  0  1	
+3  0      0 1776932  14552 13017768    0    0     0     0 47765 17296 38 15 47  0  1
+```
+
+上面发现第一列表示任务队列，变化`2-5-1-1-3`表示2个任务后加了3个任务然后完成4各任务...
