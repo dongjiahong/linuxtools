@@ -8,6 +8,7 @@ hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE
 set ruler			"打开状态栏标尺
 
 set tabstop=4		"tab键的宽度为4
+set expandtab
 set softtabstop=4	"使用退格键时，一次删除4个空格
 set shiftwidth=4	"设置<<和>>命令移动时的宽度为4
 
@@ -66,6 +67,8 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 
 Plugin 'godlygeek/tabular'
+
+Plugin 'majutsushi/tagbar'
 
 Plugin 'plasticboy/vim-markdown'
 
@@ -158,6 +161,14 @@ let g:ycm_confirm_extra_conf = 0
 "nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
+
+let g:ycm_min_num_of_chars_for_completion = 5 " 四个字符后补全
+let g:ycm_auto_trigger = 1 " 0是关闭自动触发
+
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
 "映射分割屏幕的快捷键 Ctrl+h 往左屏切,Ctrl+j往上切等
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -174,6 +185,8 @@ let g:vim_markdown_folding_disable = 1
 " 1 - 记住上次的补全方式,直到用其他的补全命令改变它
 " 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
 let g:SuperTabRetainCompletionType=2
+"let g:SuperTabDefaultCompletionType = '<C-n>'
+"
 " 支持json的语法高亮，这里需要安装json的语法高亮插件
 let g:vim_markdown_json_frontmatter = 1
 
