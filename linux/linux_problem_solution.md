@@ -52,3 +52,12 @@ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
 ```
 
 上面发现第一列表示任务队列，变化`2-5-1-1-3`表示2个任务后加了3个任务然后完成4各任务...
+
+### 磁盘挂载
+如果获取一个磁盘在`/dev/sdb` 想让它挂载在系统需要下面几步：
+
+* 格式化 `mkfs -t ext4 /dev/sdb`
+* 创建挂载路径 `mkdir -p /pdata1`
+* 挂载磁盘 `mount /dev/sdb /pdata1`
+
+如上操作就将磁盘挂载到目录 `/pdata1`
