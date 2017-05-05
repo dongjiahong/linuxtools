@@ -13,3 +13,11 @@
 #### 示例：
 `grant all privileges on crawl.* to joe@'%';` 将数据库`crawl`里的所有表的所有权限都给用户`joe`，而
 且可以从任何地方访问到该库
+
+### 备份和还原
+
+备份某些表,指令:> `mysqldump -hhostname -uusername -ppassword databasename table1 table2 > bakfile.sql`
+
+还原某些表,指令:> `mysql -hhostname -uusername -ppassword databasename < bakfile.sql`
+
+将数据库转移到新服务器,指令:> `mysqldump -uusername -ppassword databasename | mysql –host=*.*.*.* -C databasename`
