@@ -57,6 +57,12 @@ git merge dev
 git branch -d develop
 # git diff [<options>] [<commit> [<commit>]] [--] [<path>...]
 git diff commit1 commit2
+# 显示出所有有差异的文件的详细差异
+git diff branch1 branch2
+# 显示出所有有差异的文件列表
+git diff branch1 branch2 --stat
+# 显示指定文件的详细差异
+git diff branch1 branch2 filename
 # 合并其他分支的文件git checkout -p, --patch  select hunks interactively
 git checkout -p example src/a.h  # 不切换分支，将example分支下，src/a.h文件合并到本分支
 ```
