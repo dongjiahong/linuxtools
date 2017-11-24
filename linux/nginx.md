@@ -9,3 +9,5 @@
 * cpan Test::Nginx::Socket
 
 如果想要使用test-nginx还需要使用依赖项[test-nginx](https://github.com/openresty/test-nginx)
+
+# 在openresty中
