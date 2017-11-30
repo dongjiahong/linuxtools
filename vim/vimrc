@@ -7,6 +7,8 @@ set cursorline		"突出当前行
 hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE
 set ruler			"打开状态栏标尺
 
+set incsearch       "搜索时，实时预览
+
 set tabstop=4		"tab键的宽度为4
 set expandtab
 set softtabstop=4	"使用退格键时，一次删除4个空格
