@@ -1,10 +1,74 @@
 
 alias ls='ls -Gh'
 alias ll='ls -l'
+alias l='ls -l'
 alias rm='rm -i'
 alias grep='grep --color'
+alias tailf='tail -f'
+alias python='python3'
+
+alias vi='vim'
+
+alias g++='/usr/local/Cellar/gcc49/4.9.3/bin/g++-4.9 -std=c++11'
+alias gcc='/usr/local/Cellar/gcc49/4.9.3/bin/gcc-4.9'
+
+alias aws3='aws s3'
+
+alias wecat='open -n /Applications/WeChat.app/Contents/MacOS/WeChat'
+
+alias nginx='/usr/local/openresty/nginx/sbin/nginx'
+
+#  git ---- git
+find_git_branch () {
+  local dir=. head
+  until [ "$dir" -ef / ]; do
+    if [ -f "$dir/.git/HEAD" ]; then
+      head=$(< "$dir/.git/HEAD")
+      if [[ $head = ref:\ refs/heads/* ]]; then
+        git_branch=" →${head#*/*/}"
+      elif [[ $head != '' ]]; then
+        git_branch=" →(detached)"
+      else
+        git_branch=" →(unknow)"
+      fi
+      return
+    fi
+    dir="../$dir"
+  done
+  git_branch=''
+}
+
+PROMPT_COMMAND="find_git_branch; $PROMPT_COMMAND"
 
 # 红色
-export PS1="\[\e[35m\][\u@\h \w]$\[\e[m\]"
+#export PS1="\[\e[35m\][\u@\h \w]$\[\e[m\]"
 # 绿色
 #export PS1="\[\e[32m\][\u@\h \w]$\[\e[m\]"
+# 绿色带git信息
+export PS1="\[\e[32m\]\w\[\e[m\]\[\e[36m\]\$git_branch$ \[\e[m\]"
+
+export NVM_DIR="/Users/lele/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# golang
+export GOROOT="/usr/local/go"
+export GOPATH="$HOME/Applications/Go"
+export GOBIN="$HOME/Applications/Go/bin:$GOROOT/bin"
+export PATH="$PATH:$GOPATH/bin:/Users/lele/Applications/go/src/github.com/uber/go-torch/FlameGraph"
+
+# beego
+alias bee='/Users/lele/Applications/Go/bin/bee'
+
+# rabbitMQ
+export PATH="$PATH:/usr/local/sbin"
+
+# AWS
+export AWS_REGION=ap-southeast-1
+
+# Android
+export ANDROID_HOME="/Users/lele/Android/android-sdk-macosx"
+export PATH="$PATH:$ANDROID_HOME/tools"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+
+# added by travis gem
+[ -f /Users/lele/.travis/travis.sh ] && source /Users/lele/.travis/travis.sh
